@@ -7,7 +7,7 @@
  * @link        https://www.ioa.tw/
  */
 
-define('TITLE', 'Lalilo');
-define('KEYWORD', '');
-define('DESCRIPTION', '');
+define('TITLE', 'iOS UIKit UIColor');
+define('KEYWORD', 'iOS 13 system colors');
+define('DESCRIPTION', 'iOS 13 system colors');
 define('SEPARATE', ' - ');
