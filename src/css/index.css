@@ -121,7 +121,7 @@ body {
   flex-grow: 1;
   padding: 0 6px;
 }
-.group .light div input, .group .dark div input {
+.group .light .rgba, .group .light .hex, .group .dark .rgba, .group .dark .hex {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -143,38 +143,38 @@ body {
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
-.group .light div input::-webkit-selection, .group .dark div input::-webkit-selection {
+.group .light .rgba::-webkit-selection, .group .light .hex::-webkit-selection, .group .dark .rgba::-webkit-selection, .group .dark .hex::-webkit-selection {
   color: white;
   background-color: #007aff;
 }
-.group .light div input::-moz-selection, .group .dark div input::-moz-selection {
+.group .light .rgba::-moz-selection, .group .light .hex::-moz-selection, .group .dark .rgba::-moz-selection, .group .dark .hex::-moz-selection {
   color: white;
   background-color: #007aff;
 }
-.group .light div input::-ms-selection, .group .dark div input::-ms-selection {
+.group .light .rgba::-ms-selection, .group .light .hex::-ms-selection, .group .dark .rgba::-ms-selection, .group .dark .hex::-ms-selection {
   color: white;
   background-color: #007aff;
 }
-.group .light div input::-o-selection, .group .dark div input::-o-selection {
+.group .light .rgba::-o-selection, .group .light .hex::-o-selection, .group .dark .rgba::-o-selection, .group .dark .hex::-o-selection {
   color: white;
   background-color: #007aff;
 }
-.group .light div input::selection, .group .dark div input::selection {
+.group .light .rgba::selection, .group .light .hex::selection, .group .dark .rgba::selection, .group .dark .hex::selection {
   color: white;
   background-color: #007aff;
 }
-.group .light div input:focus, .group .dark div input:focus {
+.group .light .rgba:focus, .group .light .hex:focus, .group .dark .rgba:focus, .group .dark .hex:focus {
   outline: 0;
 }
-.group .light div input:hover, .group .dark div input:hover {
+.group .light .rgba:hover, .group .light .hex:hover, .group .dark .rgba:hover, .group .dark .hex:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.group .light div .rgba, .group .dark div .rgba {
+.group .light .rgba, .group .dark .rgba {
   height: 23px;
   line-height: 23px;
   font-size: medium;
 }
-.group .light div .hex, .group .dark div .hex {
+.group .light .hex, .group .dark .hex {
   height: 20px;
   line-height: 20px;
   font-size: small;
@@ -192,11 +192,37 @@ body {
   border-top: 1px solid rgba(60, 60, 67, 0.13);
 }
 .group .name {
+  cursor: pointer;
+  position: relative;
   display: inline-block;
   width: 100%;
   height: 44px;
-  line-height: 44px;
+  line-height: 36px;
   border-bottom: 1px solid rgba(60, 60, 67, 0.18);
+}
+.group .name:before {
+  content: attr(text);
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  bottom: 4px;
+  right: 4px;
+  display: inline-block;
+  width: calc(100% - 4px * 2);
+  height: calc(100% - 4px * 2);
+  background-color: white;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.group .name:hover:before {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 #form {
@@ -278,6 +304,7 @@ body {
   display: inline-block;
   width: 200px;
   padding: 8px;
+  z-index: 999;
 }
 #alert span {
   position: relative;
@@ -311,6 +338,15 @@ body {
   -ms-animation: empty 5s linear;
   -o-animation: empty 5s linear;
   animation: empty 5s linear;
+}
+
+.copy {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  position: fixed;
+  left: -1000px;
+  top: -1000px;
+  z-index: -9999;
 }
 
 @-webkit-keyframes empty {

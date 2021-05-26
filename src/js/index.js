@@ -77,17 +77,20 @@ Load.init({
     }
   },
   methods: {
-    copy (el) {
-      el.target.focus()
-      el.target.select()
-      el.target.setSelectionRange(0, 30)
+    copy (str) {
+      const el = document.createElement('textarea')
+      el.className = 'copy'
+      el.value = str
+      document.body.appendChild(el)
+      el.select()
 
       try {
-        document.execCommand("copy")
-        el.target.setSelectionRange(0, 0)
+        document.execCommand('copy')
         this.messages.push({ text: '複製成功！', id: Date.now() })
         setTimeout(_ => this.messages.shift(), 5000)
       } catch (_) {}
+
+      document.body.removeChild(el)
     }
   },
   template: El.render(`
@@ -103,18 +106,19 @@ Load.init({
         header
           b => *text=group.title
           span => *text=group.key
+
         div.colors
           div.color => *for=color in group.colors   key=color.name
-            b.name => *text=color.name
+            label.name => :text=color.name   @click=copy(color.name)
             div.light
               span => :style={ backgroundColor: '#' + color.light.hex }
               div
-                input.rgba => :value='rgba(' + color.light.rgba.join(', ') + ')'   @click=e=>copy(e)   :readonly=true
-                input.hex => :value='#' + color.light.hex   @click=e=>copy(e)   :readonly=true
+                label.rgba => *text='rgba(' + color.light.rgba.join(', ') + ')'   @click=copy('rgba(' + color.light.rgba.join(', ') + ')')   :readonly=true
+                label.hex => *text='#' + color.light.hex   @click=copy('#' + color.light.hex)   :readonly=true
             div.dark
               span => :style={ backgroundColor: '#' + color.dark.hex }
               div
-                input.rgba => :value='rgba(' + color.dark.rgba.join(', ') + ')'   @click=e=>copy(e)   :readonly=true
-                input.hex => :value='#' + color.dark.hex   @click=e=>copy(e)   :readonly=true
+                label.rgba => *text='rgba(' + color.dark.rgba.join(', ') + ')'   @click=copy('rgba(' + color.dark.rgba.join(', ') + ')')   :readonly=true
+                label.hex => *text='#' + color.dark.hex   @click=copy('#' + color.dark.hex)   :readonly=true
       `)
 })
