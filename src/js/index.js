@@ -121,7 +121,7 @@ Load.Vue({
 
     div#colors._h => *if=group
       div.color._v => *for=color in group.colors   :key=color.name
-        label => *text=nameStr(group.name)   @click=copy(nameStr(group.name))
+        label => *text=nameStr(color.name)   @click=copy(nameStr(color.name))
         div.light._h
           figure => :style={backgroundColor: 'rgba(' + color.light.join(', ') + ')'}
           label => *text=colorStr(color.light)   @click=copy(colorStr(color.light))
