@@ -1,6 +1,6 @@
 /**
- * @author      OA Wu <comdan66@gmail.com>
- * @copyright   Copyright (c) 2015 - 2021, Lalilo
+ * @author      OA Wu <oawu.tw@gmail.com>
+ * @copyright   Copyright (c) 2015 - 2022, Lalilo
  * @license     http://opensource.org/licenses/MIT  MIT License
  * @link        https://www.ioa.tw/
  */
@@ -27,6 +27,8 @@ module.exports = {
   ],
 
   ignoreDirs: [], // 忽略的目錄
+
+  includeFiles: ['CNAME'], // 允許的檔案
 
   exts: [ // 允許的副檔名
     '.php', '.html', '.txt', '.css', '.js', '.eot', '.svg', '.ttf', '.woff', '.png', '.jpg', '.jpeg', '.gif', '.ico', '.xml', '.json'

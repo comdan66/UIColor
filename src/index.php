@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @author      OA Wu <comdan66@gmail.com>
- * @copyright   Copyright (c) 2015 - 2021, LaliloCore
+ * @author      OA Wu <oawu.tw@gmail.com>
+ * @copyright   Copyright (c) 2015 - 2022, LaliloCore
  * @license     http://opensource.org/licenses/MIT  MIT License
  * @link        https://www.ioa.tw/
  */
@@ -19,10 +19,14 @@ echo html(
 
     asset()
       ->css('icon.css')
+      ->css('_/Segmented.css')
+      ->css('_/Toastr.css')
       ->css('index.css')
       ->js('https://code.jquery.com/jquery-1.12.4.min.js')
       ->js('https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js')
-      ->js('core.js')
+      ->js('_/Core.js')
+      ->js('_/Segmented.js')
+      ->js('_/Toastr.js')
       ->js('index.js')
   ),
   body()

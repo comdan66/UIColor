@@ -1,10 +1,12 @@
 //
-// @author      OA Wu <comdan66@gmail.com>
-// @copyright   Copyright (c) 2015 - 2021, Lalilo
+// @author      OA Wu <oawu.tw@gmail.com>
+// @copyright   Copyright (c) 2015 - 2022, Lalilo
 // @license     http://opensource.org/licenses/MIT  MIT License
 // @link        https://www.ioa.tw/
 //
 
+@use "sass:math";
+@import "_/Lib";
 @import "Lalilo";
 
 * {
@@ -14,6 +16,21 @@
     @include font-smoothing(subpixel-antialiased);
   }
 }
+
+:root {
+  @each $name, $values in $ui-color {
+    --ui-color-#{$name}: #{map-get($values, light)};
+  }
+}
+
+@include dark {
+  :root {
+    @each $name, $values in $ui-color {
+      --ui-color-#{$name}: #{map-get($values, dark)};
+    }
+  }
+};
+
 body {
   position: relative;
 
@@ -22,291 +39,295 @@ body {
 
   margin: 0;
   padding: 0;
+  color: var(--ui-color-label);
 
+  font-size: medium;
   text-align: center;
-  font-family: Hack, monospace, "微軟正黑體", "圓體-繁", "Open sans", "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-family: "微軟正黑體", "Open sans", "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
   
-  background-color: white;
-  background-color: rgba(242, 242, 247, 1.00);
+  background-color: var(--ui-color-systemGroupedBackground);
 }
-#app {
-  display: inline-block;
+._h {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+._v {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+$w: 300px;
+$h: 52px;
+#nav {
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // right: 0;
   width: 100%;
-  max-width: 1024px;
-  padding: 12px 0;
-  padding-bottom: 32px;
+  height: $h;
+  padding-left: $w;
+  z-index: 3;
+
+  ._segmented {
+    width: 250px;
+    margin-left: 20px;
+    margin-top: math.div($h - 40px, 2);
+    + ._segmented {
+      width: 320px;
+    }
+  }
 }
-.group {
-  display: block;
-  margin-top: 12px;
-  + .group {
-    margin-top: 32px;
+#menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: $w;
+  height: 100%;
+  
+  z-index: 4;
+  padding: 16px 20px;
+  overflow-y: auto;
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: inline-block;
+    width: 1px;
+    height: 100%;
+    border-right: 1px solid var(--ui-color-systemFill);
   }
   
-  header {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 6px;
-    
-    width: 100%;
-    height: 36px;
-    line-height: 36px;
-    text-align: left;
-    border-bottom: 1px solid rgba(60,  60,  67, .29);
-    * {
-      @include user-select(none);
-    }
-    b {
-      flex-shrink: 0;
-      font-size: large;
-      margin-right: 4px;
-      color: rgba(0, 0, 0, 1);
-    }
-    span {
-      flex-grow: 1;
-      font-size: medium;
-      color: rgba(60, 60, 67, .6);
-      &:before, &:after {
-        display: inline-block;
-      }
-      &:before {
-        content: '(';
-        margin-right: 2px;
-      }
-      &:after {
-        content: ')';
-        margin-left: 2px;
-      }
-    }   
-  }
-  .colors {
-    margin-top: 10px;
-    
-    display: inline-flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-
-    width: 100%;
-
-  }
-
-  .color {
-    flex-shrink: 0;
-    display: inline-block;
-    @include box-shadow(0 0 2px rgba(0, 0, 0, .2));
-    // border: 1px solid rgba(60,  60,  67, .18);
-    width: 325px;
-    margin: 6px;
-    overflow: hidden;
-    background-color: white;
-    @include border-radius(8px);
-  }
-
-  .light, .dark {
+  
+  label {
+    @extend %-user-select-none;
     position: relative;
     
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
     width: 100%;
+    padding: 12px 12px;
+    padding-left: 12px + 36px + 10px;
+    padding-right: 16px + 10px;
+    letter-spacing: 1px;
     text-align: left;
-
-    span {
-      width: 23px + 20px + 6px * 2;
-      height: 23px + 20px + 6px * 2;
-      flex-shrink: 0;
-    }
-
-    div {
-      flex-grow: 1;
-      padding: 0 6px;
-    }
-
-    .rgba, .hex {
-      @include user-select(none);
-      @include selection(rgba(0, 122, 255, 1), rgba(255, 255, 255, 1));
-      display: inline-block;
-      width: 100%;
-      cursor: pointer;
-      position: relative;
-      padding: 0 8px;
-      border: 0;
-
-      background-color: rgba(0, 0, 0, 0);
-      @include border-radius(3px);
-      @include transition(background-color .3s);
-
-      &:focus {
-        outline: 0;
-      }
-      &:hover {
-        background-color: rgba(0, 0, 0, .1);
-      }
-    }
-    .rgba {
-      height: 23px;
-      line-height: 23px;
-      font-size: medium;
-    }
-    .hex {
-      height: 20px;
-      line-height: 20px;
-      font-size: small;
-      color: rgba(60, 60, 67, .6);
-      margin-top: 2px;
-    }
-  }
-  .dark {
-    &:after {
+    cursor: pointer;
+    @include border-radius(12px);
+    background-color: var(--ui-color-quaternarySystemFill);
+    @include transition(background-color .3s);
+    
+    &:before, &:after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 23px + 20px + 6px * 2;
-      right: 0;
       display: inline-block;
-      height: 1px;
-      border-top: 1px solid rgba(60,  60,  67, .13);
+    }
+    
+    &:before {
+      left: 12px;
+      top: 50%;
+      @include transform(translateY(-50%));
+      width: 36px;
+      height: 36px;
+      @include border-radius(6px);
+      border: 1px solid rgba(0, 0, 0, .1);
+    }
+    &:after {
+      right: 16px;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      border-top: 2px solid var(--ui-color-separator);
+      border-right: 2px solid var(--ui-color-separator);
+      @include transform(translateY(-50%) rotate(45deg));
+    }
+
+    &._text:before { background-color: var(--ui-color-label) }
+    &._background:before { background-color: var(--ui-color-systemGroupedBackground) }
+    &._color:before { background-color: var(--ui-color-systemGreen) }
+    &._separator:before { background-color: var(--ui-color-separator) }
+    &._fill:before { background-color: var(--ui-color-systemFill) }
+    &._gray:before { background-color: var(--ui-color-systemGray) }
+    * {
+    }
+    i {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      @include transform(translateY(-50%));
+      display: inline-block;
+      height: 20px;
+      line-height: 20px;
+      right: 16px + 10px;
+      font-style: normal;
+      text-align: center;
+      color: var(--ui-color-tertiaryLabel);
+      @include transition(color .3s);
+      
+      ~ b, ~ span {
+        padding-right: 20px;
+      }
+    }
+    b, span {
+      display: inline-block;
+      width: 100%;
+    }
+    span {
+      color: var(--ui-color-secondaryLabel);
+      font-size: small;
+    }
+
+    &:hover {
+      background-color: var(--ui-color-secondarySystemFill);
+    }
+    &:active {
+      background-color: var(--ui-color-systemFill);
+    }
+    &.active {
+      background-color: var(--ui-color-separator);
+      i {
+        color: var(--ui-color-secondaryLabel);
+      }
+    }
+    
+    + label {
+      margin-top: 16px;
     }
   }
-  .name {
-    cursor: pointer;
+}
+
+#colors {
+  width: 100%;
+  // padding-top: $h;
+  padding-left: $w;
+  padding-right: 20px;
+  padding-bottom: 16px;
+  flex-wrap: wrap;
+  z-index: 2;
+}
+
+.color {
+  width: 300px;
+  margin-left: 20px;
+  margin-top: 16px;
+  overflow: hidden;
+  position: relative;
+  @include border-radius(12px);
+  @include box-shadow(0 0 8px var(--ui-color-tertiarySystemFill));
+  background-color: var(--ui-color-secondarySystemGroupedBackground);
+
+  label {
     position: relative;
+    z-index: 1;
+    cursor: pointer;
     display: inline-block;
     width: 100%;
-    height: 44px;
-    line-height: 44px - 4px * 2;
-    border-bottom: 1px solid rgba(60,  60,  67, .18);
-
+    @extend %-user-select-none;
+    @include overflow-docx3();
     &:before {
-      content: attr(text);
+      content: '';
       position: absolute;
-      left: 4px;
-      top: 4px;
-      bottom: 4px;
-      right: 4px;
-
-      display: inline-block;
-      width: calc(100% - 4px * 2);
-      height: calc(100% - 4px * 2);
-      background-color: white;
-      @include border-radius(7px);
+      left: 6px;
+      top: 6px;
+      bottom: 6px;
+      right: 6px;
+      @include border-radius(8px);
+      background-color: transparent;
       @include transition(background-color .3s);
+      
+      z-index: -1;
     }
-
 
     &:hover {
       &:before {
-        background-color: rgba(0, 0, 0, .1);
+        background-color: var(--ui-color-tertiarySystemFill);
+      }
+    }
+    &:active {
+      &:before {
+        background-color: var(--ui-color-systemFill);
       }
     }
   }
-}
-#form {
-  display: block;
-  font-family: "微軟正黑體", "圓體-繁", "Open sans", "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
-  margin: 24px 0;
-
-  label {
-    display: inline-block;
-    margin: 0 auto;
-    padding: 0 4px;
-    line-height: 40px;
+  > label {
+    flex-shrink: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ui-color-systemFill);
+    font-weight: bold;
 
     &:before {
-      content: '快速搜尋：';
-      display: inline-block;
-      margin-right: 8px;
+      // content: '';
+      // position: absolute;
+      // left: 6px;
+      // top: 6px;
+      // bottom: 6px;
+      // right: 6px;
+      // @include border-radius(8px);
+      // background-color: transparent;
+      // @include transition(background-color .3s);
+      
+      // z-index: -1;
     }
   }
-  input {
-    display: inline-block;
-    font-size: large;
-    width: 320px;
-
-    color: rgba(0, 0, 0, 1.00);
-    border: 1px solid rgba(212, 216, 220, 1.00);
-    background-color: rgba(255, 255, 255, 1.00);
-
-    padding: 0 12px;
-    height: 40px;
-    line-height: 40px;
-    letter-spacing: 1px;
-    font-family: "微軟正黑體", "圓體-繁", "Open sans", "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
-
-    @include border-radius(4px);
-    @include transition(box-shadow .16s ease-in-out, border-color .16s ease-in-out);
-
-    @include input-placeholder {
-      font-size: medium;
-      color: rgba(60.0, 60.0, 67.0, 0.6);
-    }
-
-    &:focus {
-      outline: 0;
-      border-color: rgba(128, 189, 255, 1.00);
-      @include box-shadow(0 0 0 3px rgba(0, 123, 255, .24));
-    }
-
-    &[readonly] {
-      cursor: not-allowed;
-      color: rgba(60.0, 60.0, 67.0, 0.18);
-      border-color: rgb(217, 217, 217);
-      background-color: rgba(236, 236, 236, 1.00);
-      border: 1px solid rgba(202, 206, 210, 1.00);
-      @include box-shadow(none);
-    }
-  }
-}
-#alert {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  display: inline-block;
-  width: 200px;
-  padding: 8px;
-  z-index: 999;
-  
-  span {
+  .light, .dark {
+    flex-shrink: 0;
     position: relative;
-    background-color: rgba(52, 199, 89, 1);
-    color: white;
-    display: inline-block;
+    
     width: 100%;
-    height: 36px;
-    line-height: 36px;
-    @include border-radius(8px);
-    overflow: hidden;
-    + span {
-      margin-top: 8px;
+    div {
+      position: relative;
+      z-index: 1;
+      flex-grow: 1;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
+    label {
+      @extend %-user-select-none;
+      flex-grow: 1;
+      @include overflow-docx3();
+      text-align: left;
+      padding: 0 16px;
 
-    &:after {
+      height: 52px;
+      line-height: 52px;
+    }
+  }
+  .dark {
+    &:before {
       content: '';
       position: absolute;
-      bottom: 0;
+      top: -0.5px;
       left: 0;
+      right: 0;
       display: inline-block;
-      width: 0;
-      height: 4px;
-      background-color: rgba(0, 0, 0, .3);
-      @include animation(empty 5s linear);
+      height: 1px;
+      z-index: 2;
+      border-top: 1px dashed var(--ui-color-systemFill);
     }
   }
-}
-.copy {
-  @include opacity(0);
-  position: fixed;
-  left: -1000px;
-  top: -1000px;
-  z-index: -9999;
-}
-
-@include keyframes(empty) {
-  0% { width: 100%; @include opacity(1); }
-  100% { width: 0; @include opacity(.5); }
+  
+  figure {
+    flex-shrink: 0;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    width: 56px;
+    height: 52px;
+    &:before {
+      content: '';
+      position: absolute;
+      right: -0.5px;
+      top: 0;
+      bottom: 0;
+      display: inline-block;
+      width: 1px;
+      height: 100%;
+      border-right: 1px dashed var(--ui-color-systemFill);
+    }
+  }
 }

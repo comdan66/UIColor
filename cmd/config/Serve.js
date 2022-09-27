@@ -1,6 +1,6 @@
 /**
- * @author      OA Wu <comdan66@gmail.com>
- * @copyright   Copyright (c) 2015 - 2021, Lalilo
+ * @author      OA Wu <oawu.tw@gmail.com>
+ * @copyright   Copyright (c) 2015 - 2022, Lalilo
  * @license     http://opensource.org/licenses/MIT  MIT License
  * @link        https://www.ioa.tw/
  */
@@ -30,6 +30,11 @@ module.exports = {
     formats: ['.php', '.html', '.css', '.js'],
     ignoreDirs: ['icon'], // 不監聽的目錄
   },
+
+  loaders: [ // 檔案需放在 cmd 目錄內
+    // { title: '標題', file: 'tool.js' }, // 開始時先執行
+    // { title: '標題', ext: '.json', dir: '/src', file: 'tool.js' }, // 當 ext 檔案改變時會執行
+  ],
 
   server: {
     domain: '127.0.0.1',
