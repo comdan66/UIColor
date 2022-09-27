@@ -5,263 +5,189 @@
  * @link        https://www.ioa.tw/
  */
 
-// iOS, iPadOS
-  // Red systemRed
-  // 255,  59,  48
-  // 255,  69,  58
-
-  // Orange  systemOrange
-  // 255, 149,   0
-  // 255, 159,  10
-
-  // Yellow  systemYellow
-  // 255, 204,   0
-  // 255, 214,  10
-
-  // Green systemGreen
-  //  52, 199,  89
-  //  48, 209,  88
-
-  // Mint  systemMint
-  //   0,   199, 190
-  // 102, 212, 207
-
-  // Teal  systemTeal
-  //  48, 176, 199
-  //  64, 200, 224
-
-  // Cyan  systemCyan
-  //  50, 173, 230
-  // 100, 210, 255
-
-  // Blue  systemBlue
-  //  0, 122, 255
-  // 10, 132, 255
-
-  // Indigo  systemIndigo
-  //  88,  86, 214
-  //  94,  92, 230
-
-  // Purple  systemPurple
-  // 175,  82, 222
-  // 191,  90, 242
-
-  // Pink  systemPink
-  // 255,  45,  85
-  // 255,  55,  95
-
-  // Brown systemBrown
-  // 162, 132,  94
-  // 172, 142, 104
-
-  // Gray  systemGray
-  // 142, 142, 147
-  // 142, 142, 147
-
-  // Gray (2)  systemGray2
-  // 174, 174, 178
-  //  99,  99, 102
-
-  // Gray (3)  systemGray3
-  // 199, 199, 204
-  //  72,  72,  74
-
-  // Gray (4)  systemGray4
-  // 209, 209, 214
-  //  58,  58,  60
-
-  // Gray (5)  systemGray5
-  // 229, 229, 234
-  //  44,  44,  46
-
-  // Gray (6)  systemGray6
-  // 242, 242, 247
-  //  28,  28,  30
-
-// macOS
-  // Red systemRedColor
-  // 215,   0,  21
-  // 255, 105,  97
-
-  // Orange  systemOrangeColor
-  // 201,  52,   0
-  // 255, 179,  64
-
-  // Yellow  systemYellowColor
-  // 160,  90,   0
-  // 255, 212,  38
-
-  // Green systemGreenColor
-  //   0, 125,  27
-  //  49, 222,  75
-
-  // Mint  systemMintColor
-  //  12, 129, 123
-  // 102, 212, 207
-
-  // Teal  systemTealColor
-  //   0, 130, 153
-  //  93, 230, 255
-
-  // Cyan  systemCyanColor
-  //   0, 113, 164
-  // 112, 215, 255
-
-  // Blue  systemBlueColor
-  //   0,  64, 221
-  //  64, 156, 255
-
-  // Indigo  systemIndigoColor
-  //  54,  52, 163
-  // 125, 122, 255
-
-  // Purple  systemPurpleColor
-  // 173,  68, 171
-  // 218, 143, 255
-
-  // Pink  systemPinkColor
-  // 211,  15,  69
-  // 255, 100, 130
-
-  // Brown systemBrownColor
-  // 127, 101,  69
-  // 181, 148, 105
-
-  // Gray  systemGrayColor
-  // 105, 105, 110
-  // 152, 152, 157
-
-// watchOS
-  // Red systemRed
-  // 255,  59,  48
-
-  // Orange  systemOrange
-  // 255, 149,  0
-
-  // Yellow  systemYellow
-  // 255, 230,  32
-
-  // Green systemGreen
-  //   4, 222, 113
-
-  // Mint  systemMint
-  // 102, 212, 207
-
-  // Teal  systemTeal
-  // 106, 196, 220
-
-  // Cyan  systemCyan
-  //  90, 200, 250
-
-  // Blue  systemBlue
-  //  32, 148, 250
-
-  // Indigo  systemIndigo
-  // 120, 122, 255
-
-  // Purple  systemPurple
-  // 191,  90, 242
-
-  // Pink  systemPink
-  // 250,  17,  79
-
-  // Brown systemBrown
-  // 172, 142, 104
-
-  // Gray  systemGray
-  // 155, 160, 170
-
-// https://developer.apple.com/design/human-interface-guidelines/foundations/color/
-// https://developer.apple.com/documentation/uikit/uicolor/standard_colors
-
 Load.Vue({
   data: {
     index: {
       get menu () { return Data.get('oawu/uicolor/menu') || 0 },
-      set menu (val) { return Data.set('oawu/uicolor/menu', val) },
+      set menu (val) { return Data.set('oawu/uicolor/menu', val >= 0 ? val > 5 ? 0 : val : 5) },
       get type () { return Data.get('oawu/uicolor/type') || 0 },
       set type (val) { return Data.set('oawu/uicolor/type', val) },
       get name () { return Data.get('oawu/uicolor/name') || 0 },
       set name (val) { return Data.set('oawu/uicolor/name', val) },
+      env: {
+        get '0'() { return Data.get('oawu/uicolor/env/text') || 0 },
+        set '0'(val) { Data.set('oawu/uicolor/env/text', val) },
+        get '1'() { return Data.get('oawu/uicolor/env/background') || 0 },
+        set '1'(val) { Data.set('oawu/uicolor/env/background', val) },
+        get '2'() { return Data.get('oawu/uicolor/env/color') || 0 },
+        set '2'(val) { Data.set('oawu/uicolor/env/color', val) },
+        get '3'() { return Data.get('oawu/uicolor/env/separator') || 0 },
+        set '3'(val) { Data.set('oawu/uicolor/env/separator', val) },
+        get '4'() { return Data.get('oawu/uicolor/env/fill') || 0 },
+        set '4'(val) { Data.set('oawu/uicolor/env/fill', val) },
+        get '5'() { return Data.get('oawu/uicolor/env/gray') || 0 },
+        set '5'(val) { Data.set('oawu/uicolor/env/gray', val) },
+      }
     },
     groups: [
       {
-        name: 'text', title: '文字', colors: [
-          { light: [  0,  0,  0, 1.0 ],    dark: [ 255, 255, 255, 1.0 ], name: 'label' },
-          { light: [ 60, 60, 67, 0.6 ],    dark: [ 235, 235, 245, 0.6 ], name: 'secondaryLabel' },
-          { light: [ 60, 60, 67, 0.3 ],    dark: [ 235, 235, 245, 0.3 ], name: 'tertiaryLabel' },
-          { light: [ 60, 60, 67, 0.18 ],   dark: [ 235, 235, 245, 0.18 ], name: 'quaternaryLabel' },
-          { light: [ 60, 60, 67, 0.3 ],    dark: [ 235, 235, 245, 0.3 ], name: 'placeholderText' },
-          { light: [   0, 122, 255, 1.0 ], dark: [   9, 132, 255, 1.0 ], name: 'link' },
-          { light: [ 255, 255, 255, 0.6 ], dark: [ 255, 255, 255, 0.6 ], name: 'lightTt' },
-          { light: [   0,   0,   0, 1.0 ], dark: [   0,   0,   0, 1.0 ], name: 'darkText' },
-        ],
+        name: 'text', title: '文字', envs: [
+          {
+            name: 'iOS', modes: [
+              { colors: [[   0,   0,   0, 1.00 ], [ 255, 255, 255, 1.00 ]], name: 'label' },
+              { colors: [[  60,  60,  67, 0.60 ], [ 235, 235, 245, 0.60 ]], name: 'secondaryLabel' },
+              { colors: [[  60,  60,  67, 0.30 ], [ 235, 235, 245, 0.30 ]], name: 'tertiaryLabel' },
+              { colors: [[  60,  60,  67, 0.18 ], [ 235, 235, 245, 0.18 ]], name: 'quaternaryLabel' },
+              { colors: [[   0, 122, 255, 1.00 ], [  10, 132, 255, 1.00 ]], name: 'tintColor' },
+              { colors: [[  60,  60,  67, 0.30 ], [ 235, 235, 245, 0.30 ]], name: 'placeholderText' },
+              { colors: [[   0, 122, 255, 1.00 ], [   9, 132, 255, 1.00 ]], name: 'link' },
+              { colors: [[ 255, 255, 255, 0.60 ], [ 255, 255, 255, 0.60 ]], name: 'lightText' },
+              { colors: [[   0,   0,   0, 1.00 ], [   0,   0,   0, 1.00 ]], name: 'darkText' },
+            ]
+          }
+        ]
       }, {
-        name: 'background', title: '背景', colors: [
-          { light: [ 255, 255, 255, 1.0 ], dark: [  0,  0,  0, 1.0 ], name: 'systemBackground' },
-          { light: [ 242, 242, 247, 1.0 ], dark: [ 28, 28, 30, 1.0 ], name: 'secondarySystemBackground' },
-          { light: [ 255, 255, 255, 1.0 ], dark: [ 44, 44, 46, 1.0 ], name: 'tertiarySystemBackground' },
-          { light: [ 242, 242, 247, 1.0 ], dark: [  0,  0,  0, 1.0 ], name: 'systemGroupedBackground' },
-          { light: [ 255, 255, 255, 1.0 ], dark: [ 28, 28, 30, 1.0 ], name: 'secondarySystemGroupedBackground' },
-          { light: [ 242, 242, 247, 1.0 ], dark: [ 44, 44, 46, 1.0 ], name: 'tertiarySystemGroupedBackground' },
-        ],
+        name: 'background', title: '背景', envs: [
+          {
+            name: 'iOS', modes: [
+              { colors: [[ 255, 255, 255, 1.00 ], [  0,  0,  0, 1.00 ]], name: 'systemBackground' },
+              { colors: [[ 242, 242, 247, 1.00 ], [ 28, 28, 30, 1.00 ]], name: 'secondarySystemBackground' },
+              { colors: [[ 255, 255, 255, 1.00 ], [ 44, 44, 46, 1.00 ]], name: 'tertiarySystemBackground' },
+              { colors: [[ 242, 242, 247, 1.00 ], [  0,  0,  0, 1.00 ]], name: 'systemGroupedBackground' },
+              { colors: [[ 255, 255, 255, 1.00 ], [ 28, 28, 30, 1.00 ]], name: 'secondarySystemGroupedBackground' },
+              { colors: [[ 242, 242, 247, 1.00 ], [ 44, 44, 46, 1.00 ]], name: 'tertiarySystemGroupedBackground' },
+            ]
+          }
+        ]
       }, {
-        name: 'color', title: '顏色', colors: [
-          { light: [   0, 122, 255, 1.0 ], dark: [  10, 132, 255, 1.0 ], name: 'systemBlue' },
-
-          { light: [  52, 199,  89, 1.0 ], dark: [  48, 209,  88, 1.0 ], name: 'systemGreen' },
-          { light: [  88,  86, 214, 1.0 ], dark: [  94,  92, 230, 1.0 ], name: 'systemIndigo' },
-          { light: [ 255, 149,   0, 1.0 ], dark: [ 255, 159,  10, 1.0 ], name: 'systemOrange' },
-          { light: [ 255,  45,  85, 1.0 ], dark: [ 255,  55,  95, 1.0 ], name: 'systemPink' },
-          { light: [ 175,  82, 222, 1.0 ], dark: [ 191,  90, 242, 1.0 ], name: 'systemPurple' },
-          { light: [ 255,  59,  48, 1.0 ], dark: [ 255,  69,  58, 1.0 ], name: 'systemRed' },
-          { light: [  48, 176, 199, 1.0 ], dark: [  64, 200, 224, 1.0 ], name: 'systemTeal' },
-          { light: [ 255, 204,   0, 1.0 ], dark: [ 255, 214,  10, 1.0 ], name: 'systemYellow' },
-        ],
+        name: 'color', title: '顏色', envs: [
+          {
+            name: 'iOS', modes: [
+              { colors: [[ 255,  59,  48, 1.00 ], [ 255,  69,  58, 1.00 ]], name: 'systemRed' },
+              { colors: [[ 255, 149,   0, 1.00 ], [ 255, 159,  10, 1.00 ]], name: 'systemOrange' },
+              { colors: [[ 255, 204,   0, 1.00 ], [ 255, 214,  10, 1.00 ]], name: 'systemYellow' },
+              { colors: [[  52, 199,  89, 1.00 ], [  48, 209,  88, 1.00 ]], name: 'systemGreen' },
+              { colors: [[   0, 199, 190, 1.00 ], [ 102, 212, 207, 1.00 ]], name: 'systemMint' },
+              { colors: [[  48, 176, 199, 1.00 ], [  64, 200, 224, 1.00 ]], name: 'systemTeal' },
+              { colors: [[  50, 173, 230, 1.00 ], [ 100, 210, 255, 1.00 ]], name: 'systemCyan' },
+              { colors: [[   0, 122, 255, 1.00 ], [  10, 132, 255, 1.00 ]], name: 'systemBlue' },
+              { colors: [[  88,  86, 214, 1.00 ], [  94,  92, 230, 1.00 ]], name: 'systemIndigo' },
+              { colors: [[ 175,  82, 222, 1.00 ], [ 191,  90, 242, 1.00 ]], name: 'systemPurple' },
+              { colors: [[ 255,  45,  85, 1.00 ], [ 255,  55,  95, 1.00 ]], name: 'systemPink' },
+              { colors: [[ 162, 132,  94, 1.00 ], [ 172, 142, 104, 1.00 ]], name: 'systemBrown' },
+            ]
+          },
+          {
+            name: 'macOS', modes: [
+              { colors: [[ 255,  49,  38, 1.00 ], [ 255,  79,  68, 1.00 ]], name: 'systemRed' },
+              { colors: [[ 245, 139,   0, 1.00 ], [ 255, 169,  20, 1.00 ]], name: 'systemOrange' },
+              { colors: [[ 245, 194,   0, 1.00 ], [ 255, 224,  20, 1.00 ]], name: 'systemYellow' },
+              { colors: [[  30, 195,  55, 1.00 ], [  60, 225,  85, 1.00 ]], name: 'systemGreen' },
+              { colors: [[   0, 189, 180, 1.00 ], [ 108, 224, 219, 1.00 ]], name: 'systemMint' },
+              { colors: [[  46, 167, 189, 1.00 ], [  68, 212, 237, 1.00 ]], name: 'systemTeal' },
+              { colors: [[  65, 175, 220, 1.00 ], [  90, 205, 250, 1.00 ]], name: 'systemCyan' },
+              { colors: [[   0, 112, 245, 1.00 ], [  20, 142, 255, 1.00 ]], name: 'systemBlue' },
+              { colors: [[  84,  82, 204, 1.00 ], [  99,  97, 242, 1.00 ]], name: 'systemIndigo' },
+              { colors: [[ 159,  75, 201, 1.00 ], [ 204, 101, 255, 1.00 ]], name: 'systemPurple' },
+              { colors: [[ 245,  35,  75, 1.00 ], [ 255,  65, 105, 1.00 ]], name: 'systemPink' },
+              { colors: [[ 152, 122,  84, 1.00 ], [ 182, 152, 114, 1.00 ]], name: 'systemBrown' },
+              { colors: [[ 132, 132, 137, 1.00 ], [ 162, 162, 167, 1.00 ]], name: 'systemGray' },
+            ]
+          },
+          {
+            name: 'watchOS', modes: [
+              { colors: [[ 255,  59,  48, 1.00 ]], name: 'systemRed' },
+              { colors: [[ 255, 149,   0, 1.00 ]], name: 'systemOrange' },
+              { colors: [[ 255, 230,  32, 1.00 ]], name: 'systemYellow' },
+              { colors: [[   4, 222, 113, 1.00 ]], name: 'systemGreen' },
+              { colors: [[ 102, 212, 207, 1.00 ]], name: 'systemMint' },
+              { colors: [[ 106, 196, 220, 1.00 ]], name: 'systemTeal' },
+              { colors: [[  90, 200, 250, 1.00 ]], name: 'systemCyan' },
+              { colors: [[  32, 148, 250, 1.00 ]], name: 'systemBlue' },
+              { colors: [[ 120, 122, 255, 1.00 ]], name: 'systemIndigo' },
+              { colors: [[ 191,  90, 242, 1.00 ]], name: 'systemPurple' },
+              { colors: [[ 250,  17,  79, 1.00 ]], name: 'systemPink' },
+              { colors: [[ 172, 142, 104, 1.00 ]], name: 'systemBrown' },
+              { colors: [[ 155, 160, 170, 1.00 ]], name: 'systemGray' },
+            ]
+          }
+        ]
       }, {
-        name: 'separator', title: '分隔', colors: [
-          { light: [  60,  60,  67, 0.29 ], dark: [ 84,  84,  88, 0.6 ], name: 'separator' },
-          { light: [ 198, 198, 200, 1.0 ], dark: [ 56,  56,  58, 1.0 ], name: 'opaqueSeparator' },
-        ],
+        name: 'separator', title: '分隔', envs: [
+          {
+            name: 'iOS', modes: [
+              { colors: [[  60,  60,  67, 0.29 ], [ 84,  84,  88, 0.60 ]], name: 'separator' },
+              { colors: [[ 198, 198, 200, 1.00 ], [ 56,  56,  58, 1.00 ]], name: 'opaqueSeparator' },
+            ]
+          }
+        ]
       }, {
-        name: 'fill', title: '填充', colors: [
-          { light: [ 120, 120, 128, 0.2 ], dark: [ 120, 120, 128, 0.36 ], name: 'systemFill' },
-          { light: [ 120, 120, 128, 0.16 ], dark: [ 120, 120, 128, 0.32 ], name: 'secondarySystemFill' },
-          { light: [ 118, 118, 128, 0.12 ], dark: [ 118, 118, 128, 0.24 ], name: 'tertiarySystemFill' },
-          { light: [ 116, 116, 128, 0.08 ], dark: [ 118, 118, 128, 0.18 ], name: 'quaternarySystemFill' },
-        ],
+        name: 'fill', title: '填充', envs: [
+          {
+            name: 'iOS', modes: [
+              { colors: [[ 120, 120, 128, 0.20 ], [ 120, 120, 128, 0.36 ]], name: 'systemFill' },
+              { colors: [[ 120, 120, 128, 0.16 ], [ 120, 120, 128, 0.32 ]], name: 'secondarySystemFill' },
+              { colors: [[ 118, 118, 128, 0.12 ], [ 118, 118, 128, 0.24 ]], name: 'tertiarySystemFill' },
+              { colors: [[ 116, 116, 128, 0.08 ], [ 118, 118, 128, 0.18 ]], name: 'quaternarySystemFill' },
+            ]
+          }
+        ]
       }, {
-        name: 'gray', title: '灰色', colors: [
-          { light: [ 142, 142, 147, 1.0 ], dark: [ 142, 142, 147, 1.0 ], name: 'systemGray' },
-          { light: [ 174, 174, 178, 1.0 ], dark: [  99,  99, 102, 1.0 ], name: 'systemGray2' },
-          { light: [ 199, 199, 204, 1.0 ], dark: [  72,  72,  74, 1.0 ], name: 'systemGray3' },
-          { light: [ 209, 209, 214, 1.0 ], dark: [  58,  58,  60, 1.0 ], name: 'systemGray4' },
-          { light: [ 229, 229, 234, 1.0 ], dark: [  44,  44,  46, 1.0 ], name: 'systemGray5' },
-          { light: [ 242, 242, 247, 1.0 ], dark: [  28,  28,  30, 1.0 ], name: 'systemGray6' },
+        name: 'gray', title: '灰色', envs: [
+          {
+            name: 'iOS', modes: [
+              { colors: [[ 142, 142, 147, 1.00 ], [ 142, 142, 147, 1.00 ]], name: 'systemGray' },
+              { colors: [[ 174, 174, 178, 1.00 ], [  99,  99, 102, 1.00 ]], name: 'systemGray2' },
+              { colors: [[ 199, 199, 204, 1.00 ], [  72,  72,  74, 1.00 ]], name: 'systemGray3' },
+              { colors: [[ 209, 209, 214, 1.00 ], [  58,  58,  60, 1.00 ]], name: 'systemGray4' },
+              { colors: [[ 229, 229, 234, 1.00 ], [  44,  44,  46, 1.00 ]], name: 'systemGray5' },
+              { colors: [[ 242, 242, 247, 1.00 ], [  28,  28,  30, 1.00 ]], name: 'systemGray6' },
+            ]
+          }
         ]
       }
     ],
-    key: 0,
-    type: 0,
-    keys: ['iOS UIColor Name', 'CSS var Name'],
+    refs: [
+      {text: 'OA Wu', href: 'https://www.ioa.tw'},
+      {text: 'Color Palettes for Designers and Artists - Color Hunt', href: 'https://colorhunt.co/'},
+      {text: 'siktsuí 色水  Color World - 免費配色工具', href: 'https://siktsui.com/home'},
+      {text: 'Fresh Background Gradients | WebGradients.com 💎', href: 'https://webgradients.com/'},
+      {text: 'Apple Developer Documentation', href: 'https://developer.apple.com/documentation/uikit/uicolor/standard_colors'},
+      {text: 'Color - Foundations - Human Interface Guidelines - Design - Apple Developer', href: 'https://developer.apple.com/design/human-interface-guidelines/foundations/color/'},
+    ],
+    keys: ['iOS UIColor', 'CSS var'],
     types: ['RGBA', 'HEX'],
   },
   mounted () {
-    window.addEventListener('keydown', e => [0,1,2,3,4,5].forEach(i => e.keyCode == 49 + i && (this.index.menu = i)));
+    console.error(this.index);
+    
+    window.addEventListener('keydown', e => {
+      (e.keyCode == 38 || e.keyCode == 81) && this.index.menu--
+      (e.keyCode == 40 || e.keyCode == 87) && this.index.menu++
+    });
   },
   computed: {
-    group () { return this.groups.find((_, i) => i == this.index.menu) }
+    group () { return this.groups.find((_, i) => i == this.index.menu) },
+    env () { return this.group.envs[this.index.env[this.index.menu]] },
+    envNames () { return this.group.envs.map(({ name }) => name) },
+    allColors () { return this.group.envs.map(({modes}) => modes.map(({ colors }) => colors)).reduce((a, b) => a.concat(b), []) }
   },
   methods: {
     nameStr (name) {
-      return this.index.name ? `var(--ui-color-${name})` : name
+      return this.index.name
+        ? `var(--ui-color-${this.index.env[this.index.menu] != 2
+          ? this.index.env[this.index.menu] != 1
+            ? ''
+            : 'macOS_'
+          : 'watchOS_'}${name})`
+        : name
     },
     colorStr (color) {
-      if (this.index.type == 0)
-        return `rgba(${color.join(', ')})`
-      if (this.index.type == 1)
-        return `#${(color[0] | 1 << 8).toString(16).slice(1)}${(color[1] | 1 << 8).toString(16).slice(1)}${(color[2] | 1 << 8).toString(16).slice(1)}${((color[3] * 255) | 1 << 8).toString(16).slice(1)}`
-      return ''
+      return this.index.type != 0
+        ? this.index.type != 1
+          ? ''
+          : `#${(color[0] | 1 << 8).toString(16).slice(1)}${(color[1] | 1 << 8).toString(16).slice(1)}${(color[2] | 1 << 8).toString(16).slice(1)}${((color[3] * 255) | 1 << 8).toString(16).slice(1)}`
+        : `rgba(${color.join(', ')})`
     },
     copy (copy) {
       const el = document.createElement('textarea')
@@ -277,25 +203,25 @@ Load.Vue({
     }
   },
   template: `
-  main#app
-    nav#nav._h
-      segmented => :items=types   :index=index.type   @click=i => index.type = i
-      segmented => :items=keys   :index=index.name   @click=i => index.name = i
+    main#app
+      nav#nav._h
+        segmented => :items=envNames   :index=index.env[index.menu]   @click=i => index.env[index.menu] = i
+        segmented => :items=types   :index=index.type   @click=i => index.type = i
+        segmented => :items=keys   :index=index.name   @click=i => index.name = i
 
-    aside#menu._v
-      label._v => *for=(group, i) in groups   :key=i   :class=['_' + group.name, {active: i == index.menu}]   @click=index.menu = i
-        i => *if=group   *text=group.colors.length
-        b => *text=group.title
-        span => *text=group.name
+      aside#menu._v
+        div.menu._v
+          label._v => *for=(group, i) in groups   :key=i   :class=['_' + group.name, {active: i == index.menu}]   @click=index.menu = i
+            i => *if=group   *text=group.envs.map(({modes}) => modes.map(({ colors }) => colors)).reduce((a, b) => a.concat(b), []).length
+            b => *text=group.title
+            span => *text=group.name
+        div.refs._v
+          a => *for=({ text, href }, i) in refs   :key=i   *text=text   :href=href   target=_blank
 
-    div#colors._h => *if=group
-      div.color._v => *for=color in group.colors   :key=color.name
-        label => *text=nameStr(color.name)   @click=copy(nameStr(color.name))
-        div.light._h
-          figure => :style={backgroundColor: 'rgba(' + color.light.join(', ') + ')'}
-          label => *text=colorStr(color.light)   @click=copy(colorStr(color.light))
-        div.dark._h
-          figure => :style={backgroundColor: 'rgba(' + color.dark.join(', ') + ')'}
-          label => *text=colorStr(color.dark)   @click=copy(colorStr(color.dark))
-  `
+      div#colors._h => *if=group
+        div.color._v => *for=mode in env.modes   :key=mode.name
+          label => *text=nameStr(mode.name)   @click=copy(nameStr(mode.name))
+          div.mode._h => *for=(color, i) in mode.colors   :key=i
+            figure => :style={backgroundColor: 'rgba(' + color.join(', ') + ')'}
+            label => *text=colorStr(color)   @click=copy(colorStr(color))`
 })
