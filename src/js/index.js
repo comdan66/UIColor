@@ -171,6 +171,8 @@
   // Gray  systemGray
   // 155, 160, 170
 
+// https://developer.apple.com/design/human-interface-guidelines/foundations/color/
+// https://developer.apple.com/documentation/uikit/uicolor/standard_colors
 
 Load.Vue({
   data: {
