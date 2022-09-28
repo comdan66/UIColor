@@ -250,7 +250,7 @@ Load.Vue({
         segmented => :items=segmented.names   :index=segmented.name   @click=i => segmented.name = i
 
       aside#menu._v
-        div.segmented
+        div.env
           segmented => :items=segmented.envs   :index=segmented.env   @click=i=>segmented.env=i
 
         div.menu._v
