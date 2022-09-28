@@ -18,15 +18,19 @@
 }
 
 :root {
-  @each $name, $values in $ui-color {
-    --ui-color-#{$name}: #{map-get($values, light)};
+  @each $env, $colors in $ui-color {
+    @each $name, $color in $colors {
+      --ui-color-#{$env}-#{$name}: #{map-get($color, light)};
+    }
   }
 }
 
 @include dark {
   :root {
-    @each $name, $values in $ui-color {
-      --ui-color-#{$name}: #{map-get($values, dark)};
+    @each $env, $colors in $ui-color {
+      @each $name, $color in $colors {
+        --ui-color-#{$env}-#{$name}: #{map-get($color, dark)};
+      }
     }
   }
 };
@@ -39,13 +43,13 @@ body {
 
   margin: 0;
   padding: 0;
-  color: var(--ui-color-label);
+  color: var(--ui-color-iOS-label);
 
   font-size: medium;
   text-align: center;
   font-family: "微軟正黑體", "Open sans", "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
   
-  background-color: var(--ui-color-systemGroupedBackground);
+  background-color: var(--ui-color-iOS-systemGroupedBackground);
 }
 ._h {
   display: inline-flex;
@@ -60,24 +64,39 @@ body {
   justify-content: flex-start;
 }
 $w: 300px;
-$h: 52px;
+$h: 64px;
 #nav {
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // right: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   height: $h;
   padding-left: $w;
   z-index: 3;
+  @include backdrop-filter(blur(20px));
+  background-color: rgba(242, 242, 247, .85);
+  @include dark {
+    background-color: rgba( 0,  0,  0, .85);
+  }
 
   ._segmented {
-    width: 320px;
+    width: 230px;
     margin-left: 20px;
-    margin-top: math.div($h - 40px, 2);
     // + ._segmented {
     //   width: 320px;
     // }
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    left: $w;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    width: calc(100% - #{$w});
+    height: 1px;
+    border-bottom: 1px solid var(--ui-color-iOS-systemFill);
   }
 }
 #menu {
@@ -100,9 +119,9 @@ $h: 52px;
     display: inline-block;
     width: 1px;
     height: 100%;
-    border-right: 1px solid var(--ui-color-systemFill);
+    z-index: 10;
+    border-right: 1px solid var(--ui-color-iOS-systemFill);
   }
-  
 }
 .menu {
   overflow-y: auto;
@@ -110,6 +129,8 @@ $h: 52px;
   display: inline-block;
   width: 100%;
   padding: 16px 20px;
+  padding-top: 12px + 40px + 12px + 16px;
+  z-index: 3;
   label {
     @extend %-user-select-none;
     position: relative;
@@ -122,7 +143,7 @@ $h: 52px;
     text-align: left;
     cursor: pointer;
     @include border-radius(12px);
-    background-color: var(--ui-color-quaternarySystemFill);
+    background-color: var(--ui-color-iOS-quaternarySystemFill);
     @include transition(background-color .3s);
     
     &:before, &:after {
@@ -145,17 +166,17 @@ $h: 52px;
       top: 50%;
       width: 10px;
       height: 10px;
-      border-top: 2px solid var(--ui-color-separator);
-      border-right: 2px solid var(--ui-color-separator);
+      border-top: 2px solid var(--ui-color-iOS-separator);
+      border-right: 2px solid var(--ui-color-iOS-separator);
       @include transform(translateY(-50%) rotate(45deg));
     }
 
-    &._text:before { background-color: var(--ui-color-label) }
-    &._background:before { background-color: var(--ui-color-systemGroupedBackground) }
-    &._color:before { background-color: var(--ui-color-systemGreen) }
-    &._separator:before { background-color: var(--ui-color-separator) }
-    &._fill:before { background-color: var(--ui-color-systemFill) }
-    &._gray:before { background-color: var(--ui-color-systemGray) }
+    &._text:before { background-color: var(--ui-color-iOS-label) }
+    &._background:before { background-color: var(--ui-color-iOS-systemGroupedBackground) }
+    &._color:before { background-color: var(--ui-color-iOS-systemGreen) }
+    &._separator:before { background-color: var(--ui-color-iOS-separator) }
+    &._fill:before { background-color: var(--ui-color-iOS-systemFill) }
+    &._gray:before { background-color: var(--ui-color-iOS-systemGray) }
     * {
     }
     i {
@@ -169,7 +190,7 @@ $h: 52px;
       right: 16px + 10px;
       font-style: normal;
       text-align: center;
-      color: var(--ui-color-tertiaryLabel);
+      color: var(--ui-color-iOS-tertiaryLabel);
       @include transition(color .3s);
       
       ~ b, ~ span {
@@ -181,20 +202,20 @@ $h: 52px;
       width: 100%;
     }
     span {
-      color: var(--ui-color-secondaryLabel);
+      color: var(--ui-color-iOS-secondaryLabel);
       font-size: small;
     }
 
     &:hover {
-      background-color: var(--ui-color-secondarySystemFill);
+      background-color: var(--ui-color-iOS-secondarySystemFill);
     }
     &:active {
-      background-color: var(--ui-color-systemFill);
+      background-color: var(--ui-color-iOS-systemFill);
     }
     &.active {
-      background-color: var(--ui-color-separator);
+      background-color: var(--ui-color-iOS-separator);
       i {
-        color: var(--ui-color-secondaryLabel);
+        color: var(--ui-color-iOS-secondaryLabel);
       }
     }
     
@@ -214,7 +235,7 @@ $h: 52px;
     content: '相關參考';
     text-align: left;
     font-size: small;
-    color: var(--ui-color-secondaryLabel);
+    color: var(--ui-color-iOS-secondaryLabel);
     margin-bottom: 4px;
   }
 
@@ -227,7 +248,7 @@ $h: 52px;
     display: inline-block;
     width: 100%;
     height: 1px;
-    border-top: 1px solid var(--ui-color-systemFill);
+    border-top: 1px solid var(--ui-color-iOS-systemFill);
   }
   a {
     position: relative;
@@ -235,7 +256,7 @@ $h: 52px;
     width: 100%;
     text-align: left;
     text-decoration: none;
-    color: var(--ui-color-link);
+    color: var(--ui-color-iOS-link);
     padding: 2px 0;
     padding-right: 10px;
     padding-left: 6px + 5px + 6px;
@@ -251,7 +272,7 @@ $h: 52px;
       display: inline-block;
       width: 5px;
       height: 5px;
-      background-color: var(--ui-color-link);;
+      background-color: var(--ui-color-iOS-link);;
       @include border-radius(50%);
       @include transform(translateY(-50%));
       @include opacity(.8);
@@ -272,12 +293,12 @@ $h: 52px;
 
     &:hover {
       &:after {
-        background-color: var(--ui-color-tertiarySystemFill);
+        background-color: var(--ui-color-iOS-tertiarySystemFill);
       }
     }
     &:active {
       &:after {
-        background-color: var(--ui-color-systemFill);
+        background-color: var(--ui-color-iOS-systemFill);
       }
     }
     
@@ -285,6 +306,35 @@ $h: 52px;
       margin-top: 3px;
     }
     
+  }
+}
+.segmented {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  width: 100%;
+  flex-shrink: 0;
+  padding: 12px;
+  z-index: 5;
+
+  @include backdrop-filter(blur(20px));
+  background-color: rgba(242, 242, 247, .85);
+  @include dark {
+    background-color: rgba( 0,  0,  0, .85);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid var(--ui-color-iOS-systemFill);
   }
 }
 
@@ -297,16 +347,51 @@ $h: 52px;
   flex-wrap: wrap;
   z-index: 2;
 }
+#groups {
+  width: 100%;
+  padding-top: $h;
+  padding-left: $w;
+  padding-right: 20px;
+  padding-bottom: 16px;
+  z-index: 2;
+}
+.group {
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+  &:after {
+    position: absolute;
+    right: 0;
+    top: -1px;
+    left: 20px;
+    display: inline-block;
+    width: calc(100% - 20px);
+    height: 2px;
+    border-top: 1px dashed var(--ui-color-iOS-systemFill);
+    border-bottom: 1px dashed var(--ui-color-iOS-quaternarySystemFill);
+    z-index: 2;
+  }
+  + .group {
+    margin-top: 32px;
+    padding-top: 16px;
+    &:after {
+      content: '';
+    }
+  }
+}
 
 .color {
+  position: relative;
+  z-index: 1;
+
   width: 300px;
   margin-left: 20px;
   margin-top: 16px;
   overflow: hidden;
   position: relative;
   @include border-radius(12px);
-  @include box-shadow(0 0 8px var(--ui-color-tertiarySystemFill));
-  background-color: var(--ui-color-secondarySystemGroupedBackground);
+  @include box-shadow(0 0 8px var(--ui-color-iOS-tertiarySystemFill));
+  background-color: var(--ui-color-iOS-secondarySystemGroupedBackground);
 
   label {
     position: relative;
@@ -332,19 +417,19 @@ $h: 52px;
 
     &:hover {
       &:before {
-        background-color: var(--ui-color-tertiarySystemFill);
+        background-color: var(--ui-color-iOS-tertiarySystemFill);
       }
     }
     &:active {
       &:before {
-        background-color: var(--ui-color-systemFill);
+        background-color: var(--ui-color-iOS-systemFill);
       }
     }
   }
   > label {
     flex-shrink: 0;
     padding: 12px 16px;
-    border-bottom: 1px solid var(--ui-color-systemFill);
+    border-bottom: 1px solid var(--ui-color-iOS-systemFill);
     font-weight: bold;
 
     &:before {
@@ -395,7 +480,7 @@ $h: 52px;
         display: inline-block;
         height: 1px;
         z-index: 2;
-        border-top: 1px dashed var(--ui-color-systemFill);
+        border-top: 1px dashed var(--ui-color-iOS-systemFill);
       }
     }
   }
@@ -417,7 +502,7 @@ $h: 52px;
       display: inline-block;
       width: 1px;
       height: 100%;
-      border-right: 1px dashed var(--ui-color-systemFill);
+      border-right: 1px dashed var(--ui-color-iOS-systemFill);
     }
   }
 }

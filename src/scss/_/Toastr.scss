@@ -44,11 +44,11 @@
   background-color: rgba(37, 42, 47, 1.00);
 
   &[type='info'] {
-    background-color: var(--ui-color-systemTeal);
+    background-color: var(--ui-color-iOS-systemTeal);
   }
 
   &[type='warning'] {
-    background-color: var(--ui-color-systemOrange);
+    background-color: var(--ui-color-iOS-systemOrange);
   }
   &[type='warning'], &[type='info'] {
     padding-left: 36px;
@@ -75,7 +75,7 @@
   }
 
   &[type='success'] {
-    background-color: var(--ui-color-systemGreen);
+    background-color: var(--ui-color-iOS-systemGreen);
     padding-left: 36px;
 
     &:before {
@@ -96,7 +96,7 @@
   }
 
   &[type='failure'] {
-    background-color: var(--ui-color-systemRed);
+    background-color: var(--ui-color-iOS-systemRed);
     padding-left: 36px;
 
     &:before, &:after {

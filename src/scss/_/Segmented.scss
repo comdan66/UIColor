@@ -16,7 +16,7 @@
   position: relative;
 
   width: 100%;
-  background-color: var(--ui-color-quaternaryLabel);
+  background-color: var(--ui-color-iOS-quaternaryLabel);
   @include border-radius(6px);
   @include box-shadow(inset 1px 1px 2px rgba(0, 0, 0, .2), inset 0 0 1px rgba(0, 0, 0, .1));
 
@@ -31,7 +31,7 @@
     position: relative;
     display: inline-block;
     cursor: pointer;
-    color: var(--ui-color-label);
+    color: var(--ui-color-iOS-label);
     font-size: medium;
     text-align: center;
     @include opacity(.75);
@@ -49,8 +49,8 @@
       font-weight: bold;
       font-size: x-small;
       font-style: normal;
-      color: var(--ui-color-label);
-      background-color: var(--ui-color-tertiaryLabel);
+      color: var(--ui-color-iOS-label);
+      background-color: var(--ui-color-iOS-tertiaryLabel);
       
       @include opacity(.7);
       @include border-radius(math.div(16px, 2));
@@ -65,7 +65,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: var(--ui-color-systemBackground);;
+    background-color: var(--ui-color-iOS-systemBackground);;
     @include border-radius(4px);
     @include box-shadow(0 0 3px rgba(0, 0, 0, .25));
     @include transition(transform .3s, width .3s);
