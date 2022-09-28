@@ -17,6 +17,11 @@ Load.VueComponent('segmented', {
   mounted () {
     setTimeout(_ => this.click(_ => setTimeout(_ => this.ani = true, 300)), 10)
   },
+  watch: {
+    index () {
+      this.click()
+    }
+  },
   methods: {
     text (item) {
       return Array.isArray(item) ? item[0] : item
