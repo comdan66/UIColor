@@ -6,7 +6,7 @@
 //
 
 @use "sass:math";
-@import "Lib";
+@import "_Lib";
 
 @mixin _segmented_before($x, $y) {
   @include transform(translate(calc(4px + (4px + 100%) * $x), calc(4px + (4px + 100%) * $y)));
