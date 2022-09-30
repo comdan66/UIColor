@@ -196,6 +196,9 @@ Load.Vue({
   },
   mounted () {
     window.addEventListener('keydown', e => {
+      e.keyCode == 49 && (this.segmented.name = 0)
+      e.keyCode == 50 && (this.segmented.name = 1)
+
       let env = this.segmented.env
       let envsLength = this.segmented.envs.length
 
@@ -264,7 +267,7 @@ Load.Vue({
       div#groups._v => *if=groups.length
         div.group._h => *for=(group, i) in groups   :key=i
           div.color._v => *for=mode in group   :key=mode.name
-            label => *text=nameStr(mode.name)   @click=copy(nameStr(mode.name))
+            label => *text=mode.name   @click=copy(nameStr(mode.name))
             div.mode._h => *for=(color, i) in mode.colors   :key=i
               figure => :style={backgroundColor: 'rgba(' + color.join(', ') + ')'}
               label => *text=colorStr(color)   @click=copy(colorStr(color))`
